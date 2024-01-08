@@ -22,6 +22,11 @@ class Data:
         :param symbol: Symbole de l'action (par exemple, 'META' pour Meta Platforms Inc.).
         :return: Prix de clôture le plus récent de l'action.
         """
+        # Récupère les données historiques pour le symbole spécifié sur une journée
+        data = yf.Ticker(self.symbol).history(period='1d')
+        
+        # Récupère le prix de clôture le plus récent et le retourne
+        return float('%.2f'%(data.iloc[-1]['Close']))
         pass
 
     def get_current_volume(self):
@@ -31,6 +36,11 @@ class Data:
         :param symbol: Symbole de l'action.
         :return: Volume de trading actuel formaté avec des séparateurs de milliers.
         """
+        # Récupère les informations sur le volume pour le symbole spécifié
+        volume = yf.Ticker(self.symbol).info['volume']
+        
+        # Formate le volume avec des séparateurs de milliers et le retourne
+        return "{:,.0f}".format(volume)
         pass
 
     def calculate_change(self):
@@ -41,8 +51,19 @@ class Data:
         :param reference_price: Prix de référence.
         :return: Tuple contenant le changement absolu et le changement en pourcentage.
         """
+        # Calcul du changement absolu
         
-        pass
+        current_price = self.get_current_price()
+        absolute_change = current_price - self.previousClose
+        
+        # Calcul du changement en pourcentage
+        percentage_change = (absolute_change / self.previousClose) * 100
+        
+        if self.previousClose > current_price:
+            self.change = "%.2f (%.2f%%)" % (absolute_change, percentage_change)
+        else:
+            self.change = "+%.2f (+%.2f%%)" % (absolute_change, percentage_change)
+        return self.change
 
     def get_info(self, mode = 0):
         """
