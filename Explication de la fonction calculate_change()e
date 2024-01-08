@@ -1,0 +1,24 @@
+La fonction calculate_change() de la classe Data vise à déterminer le changement absolu et en pourcentage du prix actuel par rapport à un prix de référence, qui est conservé dans la propriété previousClose. Voici comment cette fonction fonctionne de manière simplifiée :
+
+Récupération du prix actuel :
+
+J'utilise la méthode get_current_price() pour obtenir le prix de clôture le plus récent de l'action, que je stocke dans la variable current_price.
+Calcul du changement absolu :
+
+Ensuite, je calcule le changement absolu en soustrayant le prix de clôture précédent (previousClose) du prix actuel. Ce résultat est conservé dans la variable absolute_change.
+Calcul du changement en pourcentage :
+
+J'obtiens le changement en pourcentage en divisant le changement absolu par le prix de clôture précédent, puis en multipliant par 100. Le résultat est stocké dans la variable percentage_change.
+Mise à jour de la propriété change :
+
+En fonction du type de changement (positif ou négatif), j'ajuste la propriété change de l'instance. Si le prix précédent est supérieur au prix actuel, j'affiche le changement comme négatif ; sinon, je l'affiche comme positif.
+Retour du résultat :
+
+Finalement, je renvoie la valeur mise à jour de la propriété change.
+En résumé, calculate_change() me permet d'obtenir une représentation claire et formatée du changement du prix de l'action par rapport à une référence, en incluant à la fois le changement absolu et le changement en pourcentage.
+
+
+
+
+
+
